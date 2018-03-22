@@ -37,6 +37,7 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$okhttp3_version"
     compile "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    compile "com.squareup.retrofit2:converter-jaxb:$retrofit2_version"
     compile("com.squareup.retrofit2:retrofit:$retrofit2_version") {
         exclude module: "okhttp"
     }

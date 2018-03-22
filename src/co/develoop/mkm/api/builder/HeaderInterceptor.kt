@@ -9,9 +9,16 @@ class HeaderInterceptor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-        request = request.newBuilder()
-                .addHeader("Authorization", oAuthHeaderProvider.create(request.url().url().toString()))
-                .build()
+
+        val requestBuilder = request.newBuilder()
+
+        request = requestBuilder.apply {
+            if (request.method() == "POST") {
+                addHeader("Content-Type", "application/xml")
+            }
+            addHeader("Authorization", oAuthHeaderProvider.create(request.url().url().toString(), request.method()))
+        }.build()
+
         return chain.proceed(request)
     }
 }

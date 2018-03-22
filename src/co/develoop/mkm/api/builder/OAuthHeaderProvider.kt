@@ -30,16 +30,16 @@ class OAuthHeaderProvider(
 
     private val signingKey: String = appSecret.utf8() + "&" + accessSecret.utf8()
 
-    private fun getSignature(url: String): String {
+    private fun getSignature(url: String, httpMethod: String): String {
         val mac = Mac.getInstance(SIGNATURE_METHOD_MAC_ID)
         val secret = SecretKeySpec(signingKey.toByteArray(), mac.algorithm)
         mac.init(secret)
-        val digest = mac.doFinal(getBaseString(url).toByteArray())
+        val digest = mac.doFinal(getBaseString(url, httpMethod).toByteArray())
         return DatatypeConverter.printBase64Binary(digest)
     }
 
-    private fun getBaseString(url: String): String {
-        val baseString = "GET&${url.utf8()}&"
+    private fun getBaseString(url: String, httpMethod: String): String {
+        val baseString = "${httpMethod.utf8()}&${url.utf8()}&"
 
         val paramString = "oauth_consumer_key=" + oauthConsumerKey.utf8() + "&" +
                 "oauth_nonce=" + oauthNonce.utf8() + "&" +
@@ -51,8 +51,8 @@ class OAuthHeaderProvider(
         return baseString + paramString.utf8()
     }
 
-    fun create(url: String): String {
-        oauthSignature = getSignature(url)
+    fun create(url: String, httpMethod: String): String {
+        oauthSignature = getSignature(url, httpMethod)
 
         return "OAuth " +
                 "realm=\"" + url + "\", " +
