@@ -1,4 +1,4 @@
-package co.develoop.mkm.api.request
+package co.develoop.mkm.api.stock.request
 
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
