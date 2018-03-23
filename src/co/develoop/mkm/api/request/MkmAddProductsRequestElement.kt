@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement
-class MkmArticleRequestElement {
+class MkmAddProductsRequestElement {
 
     @XmlElement(name = "idProduct")
     var idProduct: Long? = null

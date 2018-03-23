@@ -1,8 +1,8 @@
 package co.develoop.mkm.api.client
 
 import co.develoop.mkm.api.builder.ApiClientBuilder
-import co.develoop.mkm.api.request.MkmAddArticlesRequest
-import co.develoop.mkm.api.response.MkmAddArticlesResponse
+import co.develoop.mkm.api.request.MkmAddProductsRequest
+import co.develoop.mkm.api.response.MkmAddProductsResponse
 import co.develoop.mkm.api.response.MkmGetStockResponse
 import co.develoop.mkm.model.MkmArticle
 import io.reactivex.Observable
@@ -20,8 +20,8 @@ class MkmStockApiClient(
         return apiClient.getStockObservable().map { it.articles }
     }
 
-    fun addArticleObservable(request: MkmAddArticlesRequest): Observable<List<MkmArticle>> {
-        return apiClient.addArticleObservable(request).map { it.articles.map { it.article } }
+    fun addProductsObservable(request: MkmAddProductsRequest): Observable<List<MkmArticle>> {
+        return apiClient.addProductsObservable(request).map { it.articles.map { it.article } }
     }
 
     private interface MkmStockApi {
@@ -30,6 +30,6 @@ class MkmStockApiClient(
         fun getStockObservable(): Observable<MkmGetStockResponse>
 
         @POST("stock")
-        fun addArticleObservable(@Body request: MkmAddArticlesRequest): Observable<MkmAddArticlesResponse>
+        fun addProductsObservable(@Body request: MkmAddProductsRequest): Observable<MkmAddProductsResponse>
     }
 }

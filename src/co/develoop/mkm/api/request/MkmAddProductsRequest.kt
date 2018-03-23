@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "request")
-class MkmAddArticlesRequest {
+class MkmAddProductsRequest {
 
     @XmlElement(name = "article")
-    lateinit var articles: List<MkmArticleRequestElement>
+    lateinit var products: List<MkmAddProductsRequestElement>
 }
