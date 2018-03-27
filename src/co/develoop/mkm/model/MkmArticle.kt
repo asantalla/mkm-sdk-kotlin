@@ -8,7 +8,7 @@ class MkmArticle(
         val language: MkmLanguage,
         val comments: String,
         val price: Double,
-        val count: Int,
+        val count: Long,
         val inShoppingCart: Boolean,
         val product: MkmProduct,
         val lastEdited: Date,
