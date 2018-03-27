@@ -7,7 +7,7 @@ class MkmArticle(
         val idProduct: Long,
         val language: MkmLanguage,
         val comments: String,
-        val price: Int,
+        val price: Double,
         val count: Int,
         val inShoppingCart: Boolean,
         val product: MkmProduct,
