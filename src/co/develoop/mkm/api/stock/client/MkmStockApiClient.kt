@@ -1,13 +1,8 @@
 package co.develoop.mkm.api.stock.client
 
 import co.develoop.mkm.api.builder.ApiClientBuilder
-import co.develoop.mkm.api.stock.request.MkmAddProductsRequest
-import co.develoop.mkm.api.stock.request.MkmDeleteArticlesRequest
-import co.develoop.mkm.api.stock.request.MkmEditArticlesRequest
-import co.develoop.mkm.api.stock.response.MkmAddProductsResponse
-import co.develoop.mkm.api.stock.response.MkmDeleteArticlesResponse
-import co.develoop.mkm.api.stock.response.MkmEditArticlesResponse
-import co.develoop.mkm.api.stock.response.MkmGetStockResponse
+import co.develoop.mkm.api.stock.request.*
+import co.develoop.mkm.api.stock.response.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -29,6 +24,12 @@ class MkmStockApiClient(
     fun deleteArticlesObservable(request: MkmDeleteArticlesRequest): Observable<MkmDeleteArticlesResponse> =
             apiClient.deleteArticlesObservable(request)
 
+    fun increaseArticlesObservable(request: MkmIncreaseArticlesRequest): Observable<MkmIncreaseArticlesResponse> =
+            apiClient.increaseArticlesObservable(request)
+
+    fun decreaseArticlesObservable(request: MkmDecreaseArticlesRequest): Observable<MkmDecreaseArticlesResponse> =
+            apiClient.decreaseArticlesObservable(request)
+
     private interface MkmStockApi {
 
         @GET("stock")
@@ -42,5 +43,11 @@ class MkmStockApiClient(
 
         @HTTP(method = "DELETE", path = "stock", hasBody = true)
         fun deleteArticlesObservable(@Body request: MkmDeleteArticlesRequest): Observable<MkmDeleteArticlesResponse>
+
+        @PUT("stock/increase")
+        fun increaseArticlesObservable(@Body request: MkmIncreaseArticlesRequest): Observable<MkmIncreaseArticlesResponse>
+
+        @PUT("stock/decrease")
+        fun decreaseArticlesObservable(@Body request: MkmDecreaseArticlesRequest): Observable<MkmDecreaseArticlesResponse>
     }
 }
