@@ -1,6 +1,6 @@
 package co.develoop.mkm.model
 
-class MkmProduct(
+class MkmShortProduct(
         val idGame: Int,
         val enName: String,
         val locName: String,
