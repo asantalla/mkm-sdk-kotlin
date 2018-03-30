@@ -12,8 +12,10 @@ class MkmStockApiClient(
 
     private val apiClient: MkmStockApi = apiClientBuilder.create(MkmStockApi::class.java)
 
-    fun getStockObservable(): Observable<MkmGetStockResponse> =
-            apiClient.getStockObservable()
+    fun getStockObservable(start: Int? = null): Observable<MkmGetStockResponse> =
+            start?.let {
+                apiClient.getStockObservable(it)
+            } ?: apiClient.getStockObservable()
 
     fun addProductsObservable(request: MkmAddProductsRequest): Observable<MkmAddProductsResponse> =
             apiClient.addProductsObservable(request)
@@ -34,6 +36,9 @@ class MkmStockApiClient(
 
         @GET("stock")
         fun getStockObservable(): Observable<MkmGetStockResponse>
+
+        @GET("stock/{start}")
+        fun getStockObservable(@Path("start") start: Int): Observable<MkmGetStockResponse>
 
         @POST("stock")
         fun addProductsObservable(@Body request: MkmAddProductsRequest): Observable<MkmAddProductsResponse>
