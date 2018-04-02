@@ -35,6 +35,9 @@ class MkmStockApiClient(
     fun findArticlesObservable(name: String, idGame: Int): Observable<MkmFindArticlesResponse> =
             apiClient.findArticlesObservable(name, idGame)
 
+    fun findArticleObservable(idArticle: String): Observable<MkmFindArticleResponse> =
+            apiClient.findArticleObservable(idArticle)
+
     private interface MkmStockApi {
 
         @GET("stock")
@@ -60,5 +63,8 @@ class MkmStockApiClient(
 
         @GET("stock/articles/{name}/{idGame}")
         fun findArticlesObservable(@Path("name") name: String, @Path("idGame") idGame: Int): Observable<MkmFindArticlesResponse>
+
+        @GET("stock/article/{idArticle}")
+        fun findArticleObservable(@Path("idArticle") idArticle: String): Observable<MkmFindArticleResponse>
     }
 }

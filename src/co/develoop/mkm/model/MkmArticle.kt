@@ -10,7 +10,7 @@ class MkmArticle(
         val price: Double,
         val count: Long,
         val inShoppingCart: Boolean,
-        val product: MkmShortProduct,
+        val shortProduct: MkmShortProduct?,
         val lastEdited: Date,
         val condition: MkmArticleCondition,
         val isFoil: Boolean,
