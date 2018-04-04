@@ -4,20 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 class MkmPriceGuide(
         @SerializedName("SELL")
-        val sell: Double,
+        val sell: Double?,
 
         @SerializedName("LOW")
-        val low: Double,
+        val low: Double?,
 
         @SerializedName("LOWEX")
-        val lowex: Double,
+        val lowex: Double?,
 
         @SerializedName("LOWFOIL")
-        val lowfoil: Double,
+        val lowfoil: Double?,
 
         @SerializedName("AVG")
-        val avg: Double,
+        val avg: Double?,
 
         @SerializedName("TREND")
-        val trend: Double
+        val trend: Double?
 )

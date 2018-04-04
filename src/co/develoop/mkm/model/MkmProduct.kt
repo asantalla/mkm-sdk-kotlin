@@ -15,10 +15,12 @@ class MkmProduct(
         val gameName: String,
         val categoryName: String,
         val number: Long,
-        val expansion: MkmExpansion,
         val priceGuide: MkmPriceGuide,
         val countArticles: Long,
         val countFoils: Long,
+
+        @SerializedName("expansion")
+        val shortExpansion: MkmShortExpansion,
 
         @SerializedName("reprint")
         val reprints: List<MkmReprint>,
