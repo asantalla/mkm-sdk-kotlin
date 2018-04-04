@@ -16,7 +16,7 @@ class ApiClientBuilder(
 
     companion object {
         private const val BASE_URL = "https://www.mkmapi.eu/ws/v2.0/output.json/"
-        private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss+0100"
+        private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     }
 
     private val oAuthHeaderProvider: OAuthHeaderProvider = OAuthHeaderProvider(

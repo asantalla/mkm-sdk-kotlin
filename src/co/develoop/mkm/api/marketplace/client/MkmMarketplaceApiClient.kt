@@ -1,6 +1,7 @@
 package co.develoop.mkm.api.marketplace.client
 
 import co.develoop.mkm.api.builder.ApiClientBuilder
+import co.develoop.mkm.api.marketplace.response.MkmGetExpansionSinglesResponse
 import co.develoop.mkm.api.marketplace.response.MkmGetExpansionsByGameResponse
 import co.develoop.mkm.api.marketplace.response.MkmGetGamesResponse
 import io.reactivex.Observable
@@ -19,6 +20,9 @@ class MkmMarketplaceApiClient(
     fun getExpansionsByGameObservable(idGame: Int): Observable<MkmGetExpansionsByGameResponse> =
             apiClient.getExpansionsByGameObservable(idGame)
 
+    fun getExpansionSinglesObservable(idExpansion: Int): Observable<MkmGetExpansionSinglesResponse> =
+            apiClient.getExpansionSinglesObservable(idExpansion)
+
     private interface MkmMarketplaceApi {
 
         @GET("games")
@@ -26,5 +30,8 @@ class MkmMarketplaceApiClient(
 
         @GET("games/{idGame}/expansions")
         fun getExpansionsByGameObservable(@Path("idGame") idGame: Int): Observable<MkmGetExpansionsByGameResponse>
+
+        @GET("expansions/{idExpansion}/singles")
+        fun getExpansionSinglesObservable(@Path("idExpansion") idExpansion: Int): Observable<MkmGetExpansionSinglesResponse>
     }
 }
