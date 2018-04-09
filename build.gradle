@@ -1,6 +1,3 @@
-group = "co.develoop.mkm"
-version = "1.0-SNAPSHOT"
-
 buildscript {
     ext.kotlin_version = '1.2.31'
 
@@ -51,4 +48,33 @@ dependencies {
 sourceSets {
     main.java.srcDirs += 'src'
     test.java.srcDirs += 'test'
+}
+
+ext {
+    bintrayRepo = 'develoop'
+    bintrayName = 'mkm-sdk-kotlin'
+
+    publishedGroupId = 'co.develoop.mkm'
+    libraryName = 'mkm-sdk-kotlin'
+    artifact = 'mkm-sdk-kotlin'
+
+    libraryDescription = 'Kotlin SDK for using the www.cardmarket.com APIs'
+
+    siteUrl = 'https://github.com/asantalla/mkm-sdk-kotlin'
+    gitUrl = 'https://github.com/asantalla/mkm-sdk-kotlin.git'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'asantalla'
+    developerName = 'Adrián Santalla'
+    developerEmail = 'adrian.santalla@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'install.gradle'
+    apply from: 'bintray.gradle'
 }
