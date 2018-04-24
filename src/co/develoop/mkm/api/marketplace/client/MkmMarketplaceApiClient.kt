@@ -4,6 +4,7 @@ import co.develoop.mkm.api.builder.ApiClientBuilder
 import co.develoop.mkm.api.marketplace.response.MkmGetExpansionSinglesResponse
 import co.develoop.mkm.api.marketplace.response.MkmGetExpansionsByGameResponse
 import co.develoop.mkm.api.marketplace.response.MkmGetGamesResponse
+import co.develoop.mkm.api.marketplace.response.MkmGetProductResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,6 +24,9 @@ class MkmMarketplaceApiClient(
     fun getExpansionSinglesObservable(idExpansion: Int): Observable<MkmGetExpansionSinglesResponse> =
             apiClient.getExpansionSinglesObservable(idExpansion)
 
+    fun getProductObservable(idProduct: Long): Observable<MkmGetProductResponse> =
+            apiClient.getProductObservable(idProduct)
+
     private interface MkmMarketplaceApi {
 
         @GET("games")
@@ -33,5 +37,8 @@ class MkmMarketplaceApiClient(
 
         @GET("expansions/{idExpansion}/singles")
         fun getExpansionSinglesObservable(@Path("idExpansion") idExpansion: Int): Observable<MkmGetExpansionSinglesResponse>
+
+        @GET("products/{idProduct}")
+        fun getProductObservable(@Path("idProduct") idProduct: Long): Observable<MkmGetProductResponse>
     }
 }
