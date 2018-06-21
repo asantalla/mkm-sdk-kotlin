@@ -15,7 +15,7 @@ class ApiClientBuilder(
 ) {
 
     companion object {
-        private const val BASE_URL = "https://www.mkmapi.eu/ws/v2.0/output.json/"
+        private const val BASE_URL = "https://api.cardmarket.com/ws/v2.0/output.json/"
         private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     }
 
