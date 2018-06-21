@@ -12,10 +12,8 @@ class MkmStockApiClient(
 
     private val apiClient: MkmStockApi = apiClientBuilder.create(MkmStockApi::class.java)
 
-    fun getStockObservable(start: Int? = null): Observable<MkmGetStockResponse> =
-            start?.let {
-                apiClient.getStockObservable(it)
-            } ?: apiClient.getStockObservable()
+    fun getStockObservable(start: Int): Observable<MkmGetStockResponse> =
+            apiClient.getStockObservable(start)
 
     fun addProductsObservable(request: MkmAddProductsRequest): Observable<MkmAddProductsResponse> =
             apiClient.addProductsObservable(request)
