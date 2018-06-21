@@ -63,7 +63,7 @@ ext {
     siteUrl = 'https://github.com/asantalla/mkm-sdk-kotlin'
     gitUrl = 'https://github.com/asantalla/mkm-sdk-kotlin.git'
 
-    libraryVersion = '0.0.2'
+    libraryVersion = '0.0.3'
 
     developerId = 'asantalla'
     developerName = 'Adrián Santalla'
@@ -74,7 +74,8 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 
-if (project.rootProject.file('local.properties').exists()) {
+if (project.rootProject.file('local.properties').
+        exists()) {
     apply from: 'install.gradle'
     apply from: 'bintray.gradle'
 }
