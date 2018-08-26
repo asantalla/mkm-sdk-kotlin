@@ -19,7 +19,7 @@ class MkmAddProductsRequestElement {
     var comments: String? = null
 
     @XmlElement(name = "price")
-    var price: Long? = null
+    var price: Double? = null
 
     @XmlElement(name = "count")
     var count: Long? = null
