@@ -1,0 +1,44 @@
+package co.develoop.mkm.api.stock.request
+
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlRootElement
+
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement
+class MkmEditArticlesRequestElement {
+
+    @XmlElement(name = "idArticle")
+    var idArticle: Long? = null
+
+    @XmlElement(name = "idLanguage")
+    var idLanguage: Int? = null
+
+    @XmlElement(name = "comments")
+    var comments: String? = null
+
+    @XmlElement(name = "price")
+    var price: Long? = null
+
+    /**
+     * Represents the maximum amount of items of which this update request will affect.
+     */
+    @XmlElement(name = "count")
+    var count: Long? = null
+
+    @XmlElement(name = "condition")
+    var condition: String? = null
+
+    @XmlElement(name = "isFoil")
+    var isFoil: Boolean = false
+
+    @XmlElement(name = "isSigned")
+    var isSigned: Boolean = false
+
+    @XmlElement(name = "isPlayset")
+    var isPlayset: Boolean = false
+
+    @XmlElement(name = "isAltered")
+    var isAltered: Boolean = false
+}
