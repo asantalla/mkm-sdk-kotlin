@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.jaxb.JaxbConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ApiClientBuilder(
         appToken: String,
@@ -17,6 +18,7 @@ class ApiClientBuilder(
     companion object {
         private const val BASE_URL = "https://api.cardmarket.com/ws/v2.0/output.json/"
         private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        private const val TIMEOUT_SECONDS = 60L
     }
 
     private val oAuthHeaderProvider: OAuthHeaderProvider = OAuthHeaderProvider(
@@ -32,6 +34,8 @@ class ApiClientBuilder(
 
     private val okHttpClient: OkHttpClient = OkHttpClient()
             .newBuilder()
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(HeaderInterceptor(oAuthHeaderProvider))
             .build()
 
