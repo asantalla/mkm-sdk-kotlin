@@ -13,10 +13,10 @@ class HeaderInterceptor(
         val requestBuilder = request.newBuilder()
 
         request = requestBuilder.apply {
-            if (request.method() == "POST") {
+            if (request.method == "POST") {
                 addHeader("Content-Type", "application/xml")
             }
-            addHeader("Authorization", oAuthHeaderProvider.create(request.url().url().toString(), request.method()))
+            addHeader("Authorization", oAuthHeaderProvider.create(request.url.toString(), request.method))
         }.build()
 
         return chain.proceed(request)
