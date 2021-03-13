@@ -1,1 +1,3 @@
-mkm-sdk-kotlin
+# Cardmarket (MKM) SDK for Kotlin
+
+TBD
