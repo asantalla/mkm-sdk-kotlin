@@ -18,6 +18,9 @@ class MkmArticle(
         val isPlayset: Boolean,
         val isAltered: Boolean,
 
+        val idCurrency: Int? = null,
+        val currencyCode: String? = null,
+
         @SerializedName("product")
         val shortProduct: MkmShortProduct?
 )
