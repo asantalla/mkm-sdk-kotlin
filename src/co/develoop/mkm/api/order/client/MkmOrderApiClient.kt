@@ -3,6 +3,7 @@ package co.develoop.mkm.api.order.client
 import co.develoop.mkm.api.builder.ApiClientBuilder
 import co.develoop.mkm.api.order.response.MkmGetOrdersResponse
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -17,7 +18,7 @@ class MkmOrderApiClient(
         actor: Actor,
         state: State,
         start: Int
-    ): Observable<MkmGetOrdersResponse> =
+    ): Observable<Response<MkmGetOrdersResponse>> =
         apiClient.getOrdersObservable(actor.name.toLowerCase(), state.name.toLowerCase(), start)
 
     private interface MkmOrderApi {
@@ -27,7 +28,7 @@ class MkmOrderApiClient(
             @Path("actor") actor: String,
             @Path("state") state: String,
             @Path("start") start: Int
-        ): Observable<MkmGetOrdersResponse>
+        ): Observable<Response<MkmGetOrdersResponse>>
     }
 
     enum class Actor {
