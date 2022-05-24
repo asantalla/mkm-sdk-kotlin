@@ -1,10 +1,14 @@
 package co.develoop.mkm.api.order.client
 
 import co.develoop.mkm.api.builder.ApiClientBuilder
+import co.develoop.mkm.api.order.request.MkmUpdateOrderStatusRequest
 import co.develoop.mkm.api.order.response.MkmGetOrdersResponse
+import co.develoop.mkm.api.order.response.MkmUpdateOrderStatusResponse
 import io.reactivex.Observable
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 class MkmOrderApiClient(
@@ -21,6 +25,12 @@ class MkmOrderApiClient(
     ): Observable<Response<MkmGetOrdersResponse>> =
         apiClient.getOrdersObservable(actor.name.toLowerCase(), state.name.toLowerCase(), start)
 
+    fun updateOrderStatusObservable(
+        request: MkmUpdateOrderStatusRequest,
+        orderId: String
+    ): Observable<Response<MkmUpdateOrderStatusResponse>> =
+        apiClient.updateOrderStatusObservable(request, orderId)
+
     private interface MkmOrderApi {
 
         @GET("orders/{actor}/{state}/{start}")
@@ -29,6 +39,12 @@ class MkmOrderApiClient(
             @Path("state") state: String,
             @Path("start") start: Int
         ): Observable<Response<MkmGetOrdersResponse>>
+
+        @PUT("order/{orderId}")
+        fun updateOrderStatusObservable(
+            @Body request: MkmUpdateOrderStatusRequest,
+            @Path("orderId") orderId: String
+        ): Observable<Response<MkmUpdateOrderStatusResponse>>
     }
 
     enum class Actor {
@@ -37,5 +53,13 @@ class MkmOrderApiClient(
 
     enum class State {
         BOUGHT, PAID, SENT, RECEIVED, LOST, CANCELLED
+    }
+
+    enum class ACTION(val action: String) {
+        SEND(action = "send"),
+        CONFIRM_RECEPTION(action = "confirmReception"),
+        CANCEL(action = "cancel"),
+        REQUEST_CANCELLATION(action = "requestCancellation"),
+        ACCEPT_CANCELLATION(action = "acceptCancellation")
     }
 }
