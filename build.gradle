@@ -35,6 +35,10 @@ dependencies {
         exclude module: "okhttp"
     }
     compile "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    compile('javax.xml.bind:jaxb-api:2.3.0')
+    compile('javax.activation:activation:1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
 }
 
 sourceSets {
