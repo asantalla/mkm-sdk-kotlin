@@ -39,23 +39,27 @@ class OAuthHeaderProvider(
     }
 
     private fun getBaseString(url: String, httpMethod: String): String {
-        val baseString = "${httpMethod.utf8()}&${url.utf8()}&"
+        val urlBaseWithParams = url.split("?")
+        val baseUrl = "${httpMethod.utf8()}&${urlBaseWithParams[0].utf8()}&"
+        val params = if (urlBaseWithParams.size > 1) "${urlBaseWithParams[1]}&" else ""
 
-        val paramString = "oauth_consumer_key=" + oauthConsumerKey.utf8() + "&" +
+        val paramString = params + "oauth_consumer_key=" + oauthConsumerKey.utf8() + "&" +
                 "oauth_nonce=" + oauthNonce.utf8() + "&" +
                 "oauth_signature_method=" + oauthSignatureMethod.utf8() + "&" +
                 "oauth_timestamp=" + oauthTimestamp.utf8() + "&" +
                 "oauth_token=" + oauthToken.utf8() + "&" +
                 "oauth_version=" + oauthVersion.utf8()
 
-        return baseString + paramString.utf8()
+        return baseUrl + paramString.utf8()
     }
 
     fun create(url: String, httpMethod: String): String {
         oauthSignature = getSignature(url, httpMethod)
 
+        val urlWithoutParams = url.split("?")[0]
+
         return "OAuth " +
-                "realm=\"" + url + "\", " +
+                "realm=\"" + urlWithoutParams + "\", " +
                 "oauth_version=\"" + oauthVersion + "\", " +
                 "oauth_timestamp=\"" + oauthTimestamp + "\", " +
                 "oauth_nonce=\"" + oauthNonce + "\", " +
