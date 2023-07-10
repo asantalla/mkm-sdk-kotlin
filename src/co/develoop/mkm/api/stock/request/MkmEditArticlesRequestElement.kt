@@ -19,7 +19,7 @@ class MkmEditArticlesRequestElement {
     var comments: String? = null
 
     @XmlElement(name = "price")
-    var price: Long? = null
+    var price: Double? = null
 
     /**
      * Represents the maximum amount of items of which this update request will affect.
