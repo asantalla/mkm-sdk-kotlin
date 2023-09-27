@@ -7,40 +7,46 @@ import io.reactivex.Observable
 import retrofit2.http.*
 
 class MkmStockApiClient(
-        apiClientBuilder: ApiClientBuilder
+    apiClientBuilder: ApiClientBuilder
 ) {
 
     private val apiClient: MkmStockApi = apiClientBuilder.create(MkmStockApi::class.java)
 
-    fun getStockObservable(start: Int): Observable<MkmGetStockResponse> =
-            apiClient.getStockObservable(start)
+    fun getStockObservable(start: Int): Observable<MkmGetStockResponse> = apiClient.getStockObservable(start)
 
     fun addProductsObservable(request: MkmAddProductsRequest): Observable<MkmAddProductsResponse> =
-            apiClient.addProductsObservable(request)
+        apiClient.addProductsObservable(request)
 
     fun editArticlesObservable(request: MkmEditArticlesRequest): Observable<MkmEditArticlesResponse> =
-            apiClient.editArticlesObservable(request)
+        apiClient.editArticlesObservable(request)
 
     fun deleteArticlesObservable(request: MkmDeleteArticlesRequest): Observable<MkmDeleteArticlesResponse> =
-            apiClient.deleteArticlesObservable(request)
+        apiClient.deleteArticlesObservable(request)
 
     fun increaseArticlesObservable(request: MkmIncreaseArticlesRequest): Observable<MkmIncreaseArticlesResponse> =
-            apiClient.increaseArticlesObservable(request)
+        apiClient.increaseArticlesObservable(request)
 
     fun decreaseArticlesObservable(request: MkmDecreaseArticlesRequest): Observable<MkmDecreaseArticlesResponse> =
-            apiClient.decreaseArticlesObservable(request)
+        apiClient.decreaseArticlesObservable(request)
 
     fun findArticlesObservable(name: String, idGame: Int): Observable<MkmFindArticlesResponse> =
-            apiClient.findArticlesObservable(name, idGame)
+        apiClient.findArticlesObservable(name, idGame)
 
     fun findArticleObservable(idArticle: String): Observable<MkmFindArticleResponse> =
-            apiClient.findArticleObservable(idArticle)
+        apiClient.findArticleObservable(idArticle)
 
     fun getArticlesInShoppingCartsObservable(): Observable<MkmGetArticlesInShoppingCartsResponse> =
-            apiClient.getArticlesInShoppingCartsObservable()
+        apiClient.getArticlesInShoppingCartsObservable()
 
-    fun getStockFileObservable(isSealed: Boolean = false, idGame: String = "1"): Observable<MkmGetStockFileResponse> =
-            apiClient.getStockFileObservable(isSealed, idGame)
+    fun getStockFileObservable(
+        idGame: Int = 1, idLanguage: Int = 1, isSealed: Boolean = false
+    ): Observable<MkmGetStockFileResponse> {
+        return apiClient.getStockFileObservable(
+            idGame = idGame,
+            idLanguage = idLanguage,
+            isSealed = isSealed
+        )
+    }
 
     private interface MkmStockApi {
 
@@ -51,7 +57,9 @@ class MkmStockApiClient(
         fun getStockObservable(@Path("start") start: Int): Observable<MkmGetStockResponse>
 
         @GET("stock/file")
-        fun getStockFileObservable(@Query("isSealed") isSealed: Boolean, @Query("idGame") idGame: String): Observable<MkmGetStockFileResponse>
+        fun getStockFileObservable(
+            @Query("idGame") idGame: Int, @Query("idLanguage") idLanguage: Int, @Query("isSealed") isSealed: Boolean
+        ): Observable<MkmGetStockFileResponse>
 
         @POST("stock")
         fun addProductsObservable(@Body request: MkmAddProductsRequest): Observable<MkmAddProductsResponse>
@@ -69,7 +77,9 @@ class MkmStockApiClient(
         fun decreaseArticlesObservable(@Body request: MkmDecreaseArticlesRequest): Observable<MkmDecreaseArticlesResponse>
 
         @GET("stock/articles/{name}/{idGame}")
-        fun findArticlesObservable(@Path("name") name: String, @Path("idGame") idGame: Int): Observable<MkmFindArticlesResponse>
+        fun findArticlesObservable(
+            @Path("name") name: String, @Path("idGame") idGame: Int
+        ): Observable<MkmFindArticlesResponse>
 
         @GET("stock/article/{idArticle}")
         fun findArticleObservable(@Path("idArticle") idArticle: String): Observable<MkmFindArticleResponse>
