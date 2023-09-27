@@ -59,13 +59,13 @@ class OAuthHeaderProvider(
         val urlWithoutParams = url.split("?")[0]
 
         return "OAuth " +
-                "realm=\"" + urlWithoutParams + "\", " +
-                "oauth_version=\"" + oauthVersion + "\", " +
-                "oauth_timestamp=\"" + oauthTimestamp + "\", " +
-                "oauth_nonce=\"" + oauthNonce + "\", " +
-                "oauth_consumer_key=\"" + oauthConsumerKey + "\", " +
-                "oauth_token=\"" + oauthToken + "\", " +
-                "oauth_signature_method=\"" + oauthSignatureMethod + "\", " +
-                "oauth_signature=\"" + oauthSignature + "\""
+                "realm=\"" + urlWithoutParams.utf8() + "\", " +
+                "oauth_version=\"" + oauthVersion.utf8() + "\", " +
+                "oauth_timestamp=\"" + oauthTimestamp.utf8() + "\", " +
+                "oauth_nonce=\"" + oauthNonce.utf8() + "\", " +
+                "oauth_consumer_key=\"" + oauthConsumerKey.utf8() + "\", " +
+                "oauth_token=\"" + oauthToken.utf8() + "\", " +
+                "oauth_signature_method=\"" + oauthSignatureMethod.utf8() + "\", " +
+                "oauth_signature=\"" + oauthSignature.utf8() + "\""
     }
 }
