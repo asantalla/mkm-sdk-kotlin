@@ -39,7 +39,7 @@ class MkmStockApiClient(
     fun getArticlesInShoppingCartsObservable(): Observable<MkmGetArticlesInShoppingCartsResponse> =
             apiClient.getArticlesInShoppingCartsObservable()
 
-    fun getStockFileObservable(isSealed: Boolean = false, idGame: Int = 1): Observable<MkmGetStockFileResponse> =
+    fun getStockFileObservable(isSealed: Boolean = false, idGame: String = "1"): Observable<MkmGetStockFileResponse> =
             apiClient.getStockFileObservable(isSealed, idGame)
 
     private interface MkmStockApi {
@@ -51,7 +51,7 @@ class MkmStockApiClient(
         fun getStockObservable(@Path("start") start: Int): Observable<MkmGetStockResponse>
 
         @GET("stock/file")
-        fun getStockFileObservable(@Query("isSealed") isSealed: Boolean, @Query("idGame") idGame: Int): Observable<MkmGetStockFileResponse>
+        fun getStockFileObservable(@Query("isSealed") isSealed: Boolean, @Query("idGame") idGame: String): Observable<MkmGetStockFileResponse>
 
         @POST("stock")
         fun addProductsObservable(@Body request: MkmAddProductsRequest): Observable<MkmAddProductsResponse>
