@@ -48,6 +48,9 @@ class MkmStockApiClient(
         )
     }
 
+    fun findArticlesByIdProductObservable(idProduct: Long): Observable<MkmFindArticlesResponse> =
+        apiClient.findArticlesByIdProductObservable(idProduct)
+
     private interface MkmStockApi {
 
         @GET("stock")
@@ -86,5 +89,8 @@ class MkmStockApiClient(
 
         @GET("stock/shoppingcart-articles")
         fun getArticlesInShoppingCartsObservable(): Observable<MkmGetArticlesInShoppingCartsResponse>
+
+        @GET("stock/products/{idProduct}")
+        fun findArticlesByIdProductObservable(@Path("idProduct") idProduct: Long): Observable<MkmFindArticlesResponse>
     }
 }
