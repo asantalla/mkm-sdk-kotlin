@@ -42,14 +42,18 @@ class MkmStockApiClient(
         idGame: Int = 1, idLanguage: Int = 1, isSealed: Boolean = false
     ): Observable<MkmGetStockFileResponse> {
         return apiClient.getStockFileObservable(
-            idGame = idGame,
-            idLanguage = idLanguage,
-            isSealed = isSealed
+            idGame = idGame, idLanguage = idLanguage, isSealed = isSealed
         )
     }
 
     fun findArticlesByIdProductObservable(idProduct: Long): Observable<MkmFindArticlesResponse> =
         apiClient.findArticlesByIdProductObservable(idProduct)
+
+    fun requestExportOwnStockObservable(): Observable<MkmRequestExportOwnStockResponse> =
+        apiClient.requestExportOwnStockObservable()
+
+    fun getExportOwnStockObservable(): Observable<MkmGetExportOwnStockResponse> =
+        apiClient.getExportOwnStockObservable()
 
     private interface MkmStockApi {
 
@@ -92,5 +96,11 @@ class MkmStockApiClient(
 
         @GET("stock/products/{idProduct}")
         fun findArticlesByIdProductObservable(@Path("idProduct") idProduct: Long): Observable<MkmFindArticlesResponse>
+
+        @POST("exports/stock")
+        fun requestExportOwnStockObservable(): Observable<MkmRequestExportOwnStockResponse>
+
+        @GET("exports/stock")
+        fun getExportOwnStockObservable(): Observable<MkmGetExportOwnStockResponse>
     }
 }
