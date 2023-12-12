@@ -13,7 +13,7 @@ class HeaderInterceptor(
         val requestBuilder = request.newBuilder()
 
         request = requestBuilder.apply {
-            if (request.method == "POST") {
+            if (request.method == "POST" && request.url.toString() != "https://api.cardmarket.com/ws/v2.0/output.json/exports/stock") {
                 addHeader("Content-Type", "application/xml")
             }
             addHeader("Authorization", oAuthHeaderProvider.create(request.url.toString(), request.method))
