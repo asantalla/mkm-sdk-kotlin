@@ -5,27 +5,27 @@ import co.develoop.mkm.api.marketplace.response.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 class MkmMarketplaceApiClient(
-        apiClientBuilder: ApiClientBuilder
+    apiClientBuilder: ApiClientBuilder
 ) {
 
     private val apiClient: MkmMarketplaceApi = apiClientBuilder.create(MkmMarketplaceApi::class.java)
 
-    fun getGamesObservable(): Observable<MkmGetGamesResponse> =
-            apiClient.getGamesObservable()
+    fun getGamesObservable(): Observable<MkmGetGamesResponse> = apiClient.getGamesObservable()
 
     fun getExpansionsByGameObservable(idGame: Int): Observable<MkmGetExpansionsByGameResponse> =
-            apiClient.getExpansionsByGameObservable(idGame)
+        apiClient.getExpansionsByGameObservable(idGame)
 
     fun getExpansionSinglesObservable(idExpansion: Int): Observable<MkmGetExpansionSinglesResponse> =
-            apiClient.getExpansionSinglesObservable(idExpansion)
+        apiClient.getExpansionSinglesObservable(idExpansion)
 
     fun getProductObservable(idProduct: Long): Observable<MkmGetProductResponse> =
-            apiClient.getProductObservable(idProduct)
+        apiClient.getProductObservable(idProduct)
 
-    fun getPriceGuideObservable(): Observable<MkmGetPriceGuideResponse> =
-            apiClient.getPriceGuideObservable()
+    fun getPriceGuideObservable(idGame: Long): Observable<MkmGetPriceGuideResponse> =
+        apiClient.getPriceGuideObservable(idGame)
 
     private interface MkmMarketplaceApi {
 
@@ -42,6 +42,6 @@ class MkmMarketplaceApiClient(
         fun getProductObservable(@Path("idProduct") idProduct: Long): Observable<MkmGetProductResponse>
 
         @GET("priceguide")
-        fun getPriceGuideObservable(): Observable<MkmGetPriceGuideResponse>
+        fun getPriceGuideObservable(@Query("idGame") idGame: Long): Observable<MkmGetPriceGuideResponse>
     }
 }
