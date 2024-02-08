@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import java.util.*
 
 class MkmOrderApiClient(
     apiClientBuilder: ApiClientBuilder
@@ -23,7 +24,11 @@ class MkmOrderApiClient(
         state: State,
         start: Int
     ): Observable<Response<MkmGetOrdersResponse>> =
-        apiClient.getOrdersObservable(actor.name.toLowerCase(), state.name.toLowerCase(), start)
+        apiClient.getOrdersObservable(
+            actor.name.lowercase(Locale.getDefault()),
+            state.name.lowercase(Locale.getDefault()),
+            start
+        )
 
     fun updateOrderStatusObservable(
         request: MkmUpdateOrderStatusRequest,

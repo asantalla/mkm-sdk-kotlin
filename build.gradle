@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.9.21'
 
     repositories {
         mavenCentral()
@@ -17,8 +17,9 @@ repositories {
 apply plugin: 'kotlin'
 
 def rxjava2_version = '2.2.21'
-def okhttp3_version = '4.10.0-RC1'
+def okhttp3_version = '5.0.0-alpha.3'
 def retrofit2_version = '2.9.0'
+def okio_jvm_version = '3.7.0'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -27,14 +28,20 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_version"
 
     // Retrofit 2
-    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation "com.squareup.okio:okio-jvm:$okio_jvm_version"
+    implementation("com.squareup.okhttp3:okhttp:$okhttp3_version") {
+        exclude module: "okio-jvm"
+    }
+
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-jaxb:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation("com.squareup.retrofit2:retrofit:$retrofit2_version") {
         exclude module: "okhttp"
     }
-    implementation("com.google.code.gson:gson:2.10.1")
 
     implementation('javax.xml.bind:jaxb-api:2.3.0')
     implementation('javax.activation:activation:1.1')
