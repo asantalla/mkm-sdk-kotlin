@@ -17,5 +17,6 @@ data class MkmOrder(
     val note: String,
     val articleCount: Int,
     @SerializedName("article")
-    val articles: List<MkmArticle>
+    val articles: List<MkmArticle>,
+    val cancellationRequests: MkmCancellationRequests? = null
 )

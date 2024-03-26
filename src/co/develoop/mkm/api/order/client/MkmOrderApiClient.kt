@@ -2,6 +2,7 @@ package co.develoop.mkm.api.order.client
 
 import co.develoop.mkm.api.builder.ApiClientBuilder
 import co.develoop.mkm.api.order.request.MkmUpdateOrderStatusRequest
+import co.develoop.mkm.api.order.response.MkmGetOrderDetailsResponse
 import co.develoop.mkm.api.order.response.MkmGetOrdersResponse
 import co.develoop.mkm.api.order.response.MkmUpdateOrderStatusResponse
 import io.reactivex.Observable
@@ -36,6 +37,11 @@ class MkmOrderApiClient(
     ): Observable<Response<MkmUpdateOrderStatusResponse>> =
         apiClient.updateOrderStatusObservable(request, orderId)
 
+    fun getOrderDetailsObservable(
+        orderId: String
+    ): Observable<Response<MkmGetOrderDetailsResponse>> =
+        apiClient.getOrderDetailsObservable(orderId)
+
     private interface MkmOrderApi {
 
         @GET("orders/{actor}/{state}/{start}")
@@ -50,6 +56,11 @@ class MkmOrderApiClient(
             @Body request: MkmUpdateOrderStatusRequest,
             @Path("orderId") orderId: String
         ): Observable<Response<MkmUpdateOrderStatusResponse>>
+
+        @GET("order/{orderId}")
+        fun getOrderDetailsObservable(
+            @Path("orderId") orderId: String
+        ): Observable<Response<MkmGetOrderDetailsResponse>>
     }
 
     enum class Actor {
