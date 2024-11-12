@@ -23,6 +23,9 @@ class MkmProductCatalogApiClient(
     fun getLorcanaNonSinglesObservable(): Observable<MkmGetProductCatalogResponse> =
         apiClient.getLorcanaNonSinglesObservable()
 
+    fun getAccessoriesObservable(): Observable<MkmGetProductCatalogResponse> =
+        apiClient.getAccessoriesObservable()
+
     private interface MkmPriceGuideApi {
 
         @GET("productCatalog/productList/products_singles_1.json")
@@ -36,5 +39,8 @@ class MkmProductCatalogApiClient(
 
         @GET("productCatalog/productList/products_nonsingles_19.json")
         fun getLorcanaNonSinglesObservable(): Observable<MkmGetProductCatalogResponse>
+
+        @GET("productCatalog/productList/products_accessories.json")
+        fun getAccessoriesObservable(): Observable<MkmGetProductCatalogResponse>
     }
 }
