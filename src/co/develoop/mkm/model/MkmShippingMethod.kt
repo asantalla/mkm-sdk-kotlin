@@ -1,4 +1,4 @@
-package co.develoop.mkm.model.order
+package co.develoop.mkm.model
 
 data class MkmShippingMethod(
     val idShippingMethod: Long,
