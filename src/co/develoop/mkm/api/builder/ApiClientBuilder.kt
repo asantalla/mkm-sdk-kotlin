@@ -38,9 +38,9 @@ class ApiClientBuilder(
         .readTimeout(TIMEOUT_UNIT, TimeUnit.MINUTES)
         .connectTimeout(TIMEOUT_UNIT, TimeUnit.MINUTES)
         .addInterceptor(HeaderInterceptor(oAuthHeaderProvider))
-        .addInterceptor(HttpLoggingInterceptor().apply { // logging interceptor coming from OkHttp
-            level = HttpLoggingInterceptor.Level.BODY
-        })
+//        .addInterceptor(HttpLoggingInterceptor().apply { // logging interceptor coming from OkHttp
+//            level = HttpLoggingInterceptor.Level.BODY
+//        })
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()

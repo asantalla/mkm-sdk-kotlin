@@ -5,6 +5,7 @@ import co.develoop.mkm.api.marketplace.response.*
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -31,6 +32,12 @@ class MkmMarketplaceApiClient(
     fun findUsersObservable(username: String): Observable<Response<MkmFindUsersResponse>> =
         apiClient.findUsersObservable(username)
 
+    fun requestExportUserOffersObservable(idUser: Long): Observable<Response<MkmRequestExportUserOffersResponse>> =
+        apiClient.requestExportUserOffersObservable(idUser)
+
+    fun getExportUserOffersDetailsObservable(idUser: Long): Observable<Response<MkmGetExportUserOffersDetailsResponse>> =
+        apiClient.getExportUserOffersDetailsObservable(idUser)
+
     private interface MkmMarketplaceApi {
 
         @GET("games")
@@ -50,5 +57,11 @@ class MkmMarketplaceApiClient(
 
         @GET("users/find")
         fun findUsersObservable(@Query("search") username: String): Observable<Response<MkmFindUsersResponse>>
+
+        @POST("exports/userOffers/{idUser}")
+        fun requestExportUserOffersObservable(@Path("idUser") idUser: Long): Observable<Response<MkmRequestExportUserOffersResponse>>
+
+        @GET("exports/userOffers/{idUser}")
+        fun getExportUserOffersDetailsObservable(@Path("idUser") idUser: Long): Observable<Response<MkmGetExportUserOffersDetailsResponse>>
     }
 }
