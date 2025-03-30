@@ -16,26 +16,23 @@ repositories {
 
 apply plugin: 'kotlin'
 
-def okhttp3_version = '5.0.0-alpha.3'
-def retrofit2_version = '2.9.0'
-def okio_jvm_version = '3.7.0'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Retrofit 2
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.10.0")
 
-    implementation "com.squareup.okio:okio-jvm:$okio_jvm_version"
-    implementation("com.squareup.okhttp3:okhttp:$okhttp3_version") {
+    implementation "com.squareup.okio:okio-jvm:3.7.0"
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.14") {
         exclude module: "okio-jvm"
     }
-
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-jaxb:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-    implementation("com.squareup.retrofit2:retrofit:$retrofit2_version") {
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14"
+    
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.11.0"
+    implementation "com.squareup.retrofit2:converter-jaxb:2.11.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.11.0"
+    implementation("com.squareup.retrofit2:retrofit:2.11.0") {
         exclude module: "okhttp"
     }
 
