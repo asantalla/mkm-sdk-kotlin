@@ -28,7 +28,7 @@ class OAuthHeaderProvider(
     private val oauthNonce = "$timestamp"
     private lateinit var oauthSignature: String
 
-    private val signingKey: String by lazy { ("$appSecret&$accessSecret").utf8() }
+    private val signingKey: String by lazy { ("${appSecret.utf8()}&${accessSecret.utf8()}") }
 
     private fun getSignature(url: String, httpMethod: String): String {
         val mac = Mac.getInstance(SIGNATURE_METHOD_MAC_ID)
