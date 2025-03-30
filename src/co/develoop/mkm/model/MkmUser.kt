@@ -1,5 +1,6 @@
 package co.develoop.mkm.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class MkmUser(
@@ -26,22 +27,34 @@ data class MkmUser(
 )
 
 enum class MkmUserType(val internalValue: Int) {
+    @SerializedName("0")
     PRIVATE(0),
+    @SerializedName("1")
     COMMERCIAL(1),
+    @SerializedName("2")
     POWERSELLER(2)
 }
 
 enum class MkmUserReputation(val internalValue: Int) {
+    @SerializedName("0")
     NOT_ENOUGH_SELLS(0),
+    @SerializedName("1")
     OUTSTANDING(1),
+    @SerializedName("2")
     VERY_GOOD(2),
+    @SerializedName("3")
     GOOD(3),
+    @SerializedName("4")
     AVERAGE(4),
+    @SerializedName("5")
     BAD(5)
 }
 
 enum class MkmRiskGroup(val internalValue: Int) {
+    @SerializedName("0")
     NO_RISK(0),
+    @SerializedName("1")
     LOW_RISK(1),
+    @SerializedName("2")
     HIGH_RISK(2)
 }

@@ -4,6 +4,6 @@ import co.develoop.mkm.model.MkmUser
 import com.google.gson.annotations.SerializedName
 
 class MkmFindUsersResponse(
-    @SerializedName("expansion")
+    @SerializedName("users")
     val users: List<MkmUser>
 )
