@@ -3,6 +3,7 @@ package co.develoop.mkm.api.builder
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.jaxb.JaxbConverterFactory
@@ -37,6 +38,9 @@ class ApiClientBuilder(
         .readTimeout(TIMEOUT_UNIT, TimeUnit.MINUTES)
         .connectTimeout(TIMEOUT_UNIT, TimeUnit.MINUTES)
         .addInterceptor(HeaderInterceptor(oAuthHeaderProvider))
+        .addInterceptor(HttpLoggingInterceptor().apply { // logging interceptor coming from OkHttp
+            level = HttpLoggingInterceptor.Level.BODY
+        })
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()

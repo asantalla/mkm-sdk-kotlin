@@ -17,6 +17,7 @@ class HeaderInterceptor(
                 addHeader("Content-Type", "application/xml")
             }
             addHeader("Authorization", oAuthHeaderProvider.create(request.url.toString(), request.method))
+            addHeader("Host", "api.cardmarket.com")
         }.build()
 
         return chain.proceed(request)

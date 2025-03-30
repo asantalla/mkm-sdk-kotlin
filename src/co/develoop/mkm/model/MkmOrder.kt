@@ -1,6 +1,5 @@
-package co.develoop.mkm.model.order
+package co.develoop.mkm.model
 
-import co.develoop.mkm.model.MkmArticle
 import com.google.gson.annotations.SerializedName
 
 data class MkmOrder(

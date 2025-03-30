@@ -6,10 +6,10 @@ import javax.crypto.spec.SecretKeySpec
 import javax.xml.bind.DatatypeConverter
 
 class OAuthHeaderProvider(
-        appToken: String,
-        appSecret: String,
-        accessToken: String,
-        accessSecret: String
+    appToken: String,
+    appSecret: String,
+    accessToken: String,
+    accessSecret: String
 ) {
 
     companion object {
@@ -28,7 +28,7 @@ class OAuthHeaderProvider(
     private val oauthNonce = "$timestamp"
     private lateinit var oauthSignature: String
 
-    private val signingKey: String = appSecret.utf8() + "&" + accessSecret.utf8()
+    private val signingKey: String by lazy { ("$appSecret&$accessSecret").utf8() }
 
     private fun getSignature(url: String, httpMethod: String): String {
         val mac = Mac.getInstance(SIGNATURE_METHOD_MAC_ID)
@@ -40,15 +40,24 @@ class OAuthHeaderProvider(
 
     private fun getBaseString(url: String, httpMethod: String): String {
         val urlBaseWithParams = url.split("?")
-        val baseUrl = "${httpMethod.utf8()}&${urlBaseWithParams[0].utf8()}&"
-        val params = if (urlBaseWithParams.size > 1) "${urlBaseWithParams[1]}&" else ""
+        val baseUrl = "${httpMethod}&${urlBaseWithParams[0].utf8()}&"
+        val params = urlBaseWithParams.subList(1, urlBaseWithParams.size).toMutableList()
 
-        val paramString = params + "oauth_consumer_key=" + oauthConsumerKey.utf8() + "&" +
-                "oauth_nonce=" + oauthNonce.utf8() + "&" +
-                "oauth_signature_method=" + oauthSignatureMethod.utf8() + "&" +
-                "oauth_timestamp=" + oauthTimestamp.utf8() + "&" +
-                "oauth_token=" + oauthToken.utf8() + "&" +
-                "oauth_version=" + oauthVersion.utf8()
+        params.add("oauth_consumer_key=" + oauthConsumerKey.utf8())
+        params.add("oauth_nonce=" + oauthNonce.utf8())
+        params.add("oauth_signature_method=" + oauthSignatureMethod.utf8())
+        params.add("oauth_timestamp=" + oauthTimestamp.utf8())
+        params.add("oauth_token=" + oauthToken.utf8())
+        params.add("oauth_version=" + oauthVersion.utf8())
+
+        var paramString = ""
+        params.sortedBy { it }.forEachIndexed { index, it ->
+            paramString += if (index < params.size - 1) {
+                "$it&"
+            } else {
+                it
+            }
+        }
 
         return baseUrl + paramString.utf8()
     }
@@ -59,13 +68,13 @@ class OAuthHeaderProvider(
         val urlWithoutParams = url.split("?")[0]
 
         return "OAuth " +
-                "realm=\"" + urlWithoutParams.utf8() + "\", " +
-                "oauth_version=\"" + oauthVersion.utf8() + "\", " +
-                "oauth_timestamp=\"" + oauthTimestamp.utf8() + "\", " +
-                "oauth_nonce=\"" + oauthNonce.utf8() + "\", " +
-                "oauth_consumer_key=\"" + oauthConsumerKey.utf8() + "\", " +
-                "oauth_token=\"" + oauthToken.utf8() + "\", " +
-                "oauth_signature_method=\"" + oauthSignatureMethod.utf8() + "\", " +
-                "oauth_signature=\"" + oauthSignature.utf8() + "\""
+                "realm=\"" + urlWithoutParams.utf8() + "\"," +
+                "oauth_consumer_key=\"" + oauthConsumerKey + "\"," +
+                "oauth_token=\"" + oauthToken + "\"," +
+                "oauth_nonce=\"" + oauthNonce + "\"," +
+                "oauth_timestamp=\"" + oauthTimestamp + "\"," +
+                "oauth_signature_method=\"" + oauthSignatureMethod + "\"," +
+                "oauth_version=\"" + oauthVersion + "\"," +
+                "oauth_signature=\"" + oauthSignature + "\""
     }
 }
