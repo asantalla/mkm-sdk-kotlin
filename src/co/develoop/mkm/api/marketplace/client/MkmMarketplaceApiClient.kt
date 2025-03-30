@@ -3,6 +3,7 @@ package co.develoop.mkm.api.marketplace.client
 import co.develoop.mkm.api.builder.ApiClientBuilder
 import co.develoop.mkm.api.marketplace.response.*
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -27,7 +28,7 @@ class MkmMarketplaceApiClient(
     fun getMetaproductsObservable(idMetaproduct: Long): Observable<MkmGetMetaproductResponse> =
         apiClient.getMetaproductsObservable(idMetaproduct)
 
-    fun findUsersObservable(username: String): Observable<MkmFindUsersResponse> =
+    fun findUsersObservable(username: String): Observable<Response<MkmFindUsersResponse>> =
         apiClient.findUsersObservable(username)
 
     private interface MkmMarketplaceApi {
@@ -48,6 +49,6 @@ class MkmMarketplaceApiClient(
         fun getMetaproductsObservable(@Path("idMetaproduct") idMetaproduct: Long): Observable<MkmGetMetaproductResponse>
 
         @GET("users/find")
-        fun findUsersObservable(@Query("search") username: String): Observable<MkmFindUsersResponse>
+        fun findUsersObservable(@Query("search") username: String): Observable<Response<MkmFindUsersResponse>>
     }
 }

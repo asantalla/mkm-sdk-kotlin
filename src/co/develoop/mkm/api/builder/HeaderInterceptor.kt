@@ -1,5 +1,6 @@
 package co.develoop.mkm.api.builder
 
+import co.develoop.mkm.extension.utf8
 import okhttp3.Interceptor
 import okhttp3.Response
 
