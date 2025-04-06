@@ -19,5 +19,8 @@ class MkmPriceGuide(
         val avg: Double?,
 
         @SerializedName("TREND")
-        val trend: Double?
+        val trend: Double?,
+
+        @SerializedName("TRENDFOIL")
+        val trendfoil: Double?
 )
