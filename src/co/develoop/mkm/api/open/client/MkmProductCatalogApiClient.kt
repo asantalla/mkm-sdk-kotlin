@@ -23,6 +23,12 @@ class MkmProductCatalogApiClient(
     fun getLorcanaNonSinglesObservable(): Observable<MkmGetProductCatalogResponse> =
         apiClient.getLorcanaNonSinglesObservable()
 
+    fun getRiftboundSinglesObservable(): Observable<MkmGetProductCatalogResponse> =
+        apiClient.getRiftboundSinglesObservable()
+
+    fun getRiftboundNonSinglesObservable(): Observable<MkmGetProductCatalogResponse> =
+        apiClient.getRiftboundNonSinglesObservable()
+
     fun getAccessoriesObservable(): Observable<MkmGetProductCatalogResponse> =
         apiClient.getAccessoriesObservable()
 
@@ -39,6 +45,12 @@ class MkmProductCatalogApiClient(
 
         @GET("productCatalog/productList/products_nonsingles_19.json")
         fun getLorcanaNonSinglesObservable(): Observable<MkmGetProductCatalogResponse>
+
+        @GET("productCatalog/productList/products_singles_22.json")
+        fun getRiftboundSinglesObservable(): Observable<MkmGetProductCatalogResponse>
+
+        @GET("productCatalog/productList/products_nonsingles_22.json")
+        fun getRiftboundNonSinglesObservable(): Observable<MkmGetProductCatalogResponse>
 
         @GET("productCatalog/productList/products_accessories.json")
         fun getAccessoriesObservable(): Observable<MkmGetProductCatalogResponse>
