@@ -17,6 +17,9 @@ class MkmPriceGuideApiClient(
     fun getLorcanaPriceGuideObservable(): Observable<MkmGetPriceGuideResponse> =
         apiClient.getLorcanaPriceGuideObservable()
 
+    fun getRiftboundPriceGuideObservable(): Observable<MkmGetPriceGuideResponse> =
+        apiClient.getRiftboundPriceGuideObservable()
+
     private interface MkmPriceGuideApi {
 
         @GET("productCatalog/priceGuide/price_guide_1.json")
@@ -24,5 +27,8 @@ class MkmPriceGuideApiClient(
 
         @GET("productCatalog/priceGuide/price_guide_19.json")
         fun getLorcanaPriceGuideObservable(): Observable<MkmGetPriceGuideResponse>
+
+        @GET("productCatalog/priceGuide/price_guide_22.json")
+        fun getRiftboundPriceGuideObservable(): Observable<MkmGetPriceGuideResponse>
     }
 }
